@@ -321,18 +321,17 @@ public class FenEtu extends JFrame implements WindowListener
             }
         }
     }
-   static class ConfirmDialogInFrame extends JFrame {
+    static class ConfirmDialogInFrame extends JFrame {
 
-       public ConfirmDialogInFrame() {
-           getContentPane().setBackground(Color.DARK_GRAY);
-           setTitle("Confirm Dialog in Frame");
-           setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-           setVisible(true);
-           setResizable(false);
-           setSize(400, 300);
-           getContentPane().setLayout(null);
-       }
-   }
+        public ConfirmDialogInFrame() {
+            setTitle("Quitter?");
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            setVisible(true);
+            setResizable(false);
+            setSize(400, 300);
+            getContentPane().setLayout(null);
+        }
+    }
 
     public static void main(String[] args)
     {
@@ -341,20 +340,14 @@ public class FenEtu extends JFrame implements WindowListener
 
     @Override
     public void windowClosing(WindowEvent e){
-        int input = JOptionPane.showConfirmDialog(new ConfirmDialogInFrame(),"Tu es sûr de vouloir quitter ?","", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
-        // 0=ok, 2=cancel
-        if (input==0) {
-            System.out.println(input);
+        int input = JOptionPane.showConfirmDialog(frame,"Voulez vous quitter l'application ?","", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if (input==JOptionPane.OK_OPTION){
             System.out.println("Application Fermée");
             frame.dispose();
             System.exit(0);
-
-            {
-                System.out.println("Application Fermée");
-            }
         }
-        else{
-            System.out.println("Je sais pas comment on fait pour pas fermer tout de même la fenetre...");
+        else if (input==JOptionPane.CANCEL_OPTION){
+            frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         }
     }
 
